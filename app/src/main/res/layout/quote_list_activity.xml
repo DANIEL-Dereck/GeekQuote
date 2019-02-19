@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_quote_list_vlayout"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:id="@+id/ll_quote_list_hlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_quote_list_add_quote"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btn_quote_list_add_quote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_add"
+            android:textColor="@android:color/white"
+            android:text="@string/add"
+            android:layout_weight="3"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

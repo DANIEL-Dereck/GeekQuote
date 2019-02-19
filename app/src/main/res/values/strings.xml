@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">GeekQuote</string>
+    <string name="default_text">DefaultText</string>
+
+    <string name="add">+</string>
+    <string name="edit">Editer</string>
+    <string name="delete">Supprimer</string>
 
     <string-array name="quotes">
         <item>I know kung fu.</item>
@@ -11,5 +16,7 @@
         <item>I would love to change the world, but they won\'t give me the source code</item>
         <item>I\'m still a geek on the inside, that\'s the important thing.</item>
         <item>I am GROOT</item>
+        <item>Fus Ro Dah !!!!</item>
+        <item>Avant j\’étais aventurier. Et puis j\’ai pris une flèche dans le genou.</item>
     </string-array>
 </resources>

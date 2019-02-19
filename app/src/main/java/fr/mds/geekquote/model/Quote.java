@@ -12,6 +12,7 @@ public class Quote {
 
     public Quote(String strQuote) {
         this.strQuote = strQuote;
+        this.rating = 0;
         this.creationDate = DateTime.now();
     }
 
