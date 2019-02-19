@@ -4,41 +4,32 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import fr.mds.geekquote.R;
+import fr.mds.geekquote.adapter.QuoteAdapter;
 import fr.mds.geekquote.model.Quote;
 
-public class QuoteListActivity extends Activity //implements View.OnClickListener
+public class QuoteListActivity extends Activity implements AdapterView.OnItemClickListener
 {
     public static final String TAG = "QuoteListActivity";
     private ArrayList<Quote> quotes = new ArrayList<>();
+    private QuoteAdapter quoteAdapter;
 
     private LinearLayout ll_quote_list_vlayout;
     private Button btn_quote_list_add_quote;
     private EditText et_quote_list_add_quote;
+    private ListView lv_list_quote_quotes;
 
-    private void addQuote(String quote)
-    {
+    private void addQuote(String quote) {
         this.quotes.add(new Quote(quote));
-
-        TextView newQuote = new TextView(this);
-        newQuote.setText(quote);
-
-        if (quotes.size() % 2 == 0) {
-            newQuote.setBackgroundResource(R.color.colorPair);
-        } else {
-            newQuote.setBackgroundResource(R.color.colorImpair);
-        }
-
-        newQuote.setTextColor(getResources().getColor(android.R.color.white));
-
-        this.ll_quote_list_vlayout.addView(newQuote);
+        this.quoteAdapter.notifyDataSetChanged();
     }
 
     private void initComponent()
@@ -46,6 +37,7 @@ public class QuoteListActivity extends Activity //implements View.OnClickListene
         this.ll_quote_list_vlayout = findViewById(R.id.ll_quote_list_vlayout);
         this.btn_quote_list_add_quote = findViewById(R.id.btn_quote_list_add_quote);
         this.et_quote_list_add_quote = findViewById(R.id.et_quote_list_add_quote);
+        this.lv_list_quote_quotes = findViewById(R.id.lv_list_quote_quotes);
     }
 
     public void onClick(View view)
@@ -64,6 +56,10 @@ public class QuoteListActivity extends Activity //implements View.OnClickListene
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.quote_list_activity);
         this.initComponent();
+        this.quoteAdapter = new QuoteAdapter(this, quotes);
+        lv_list_quote_quotes.setOnItemClickListener(this);
+        lv_list_quote_quotes.setAdapter(quoteAdapter);
+
 
         for (String quote : getResources().getStringArray(R.array.quotes)) {
             this.addQuote(quote);
@@ -81,5 +77,11 @@ public class QuoteListActivity extends Activity //implements View.OnClickListene
                 }
             }
         });
+    }
+
+    public void onItemClick(AdapterView<?> theList,
+                            View view, int position, long id) {
+        String station = (String)theList.getItemAtPosition(position);
+        Toast.makeText(this, "item" + position, Toast.LENGTH_SHORT).show();
     }
 }
