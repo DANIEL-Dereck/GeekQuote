@@ -8,7 +8,6 @@ public class Quote {
     private DateTime creationDate;
 
     public Quote() {
-        this.creationDate = DateTime.now();
     }
 
     public Quote(String strQuote) {
@@ -41,5 +40,14 @@ public class Quote {
     public Quote setCreationDate(DateTime creationDate) {
         this.creationDate = creationDate;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "strQuote='" + strQuote + '\'' +
+                ", rating=" + rating +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
