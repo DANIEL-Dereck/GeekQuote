@@ -77,7 +77,7 @@ public class QuoteListActivity extends Activity //implements View.OnClickListene
                     addQuote(et_quote_list_add_quote.getText().toString());
                     et_quote_list_add_quote.setText("");
                 } else {
-                    Toast.makeText(getBaseContext(), "Impossible de crée une quote vide.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuoteListActivity.this, "Impossible de crée une quote vide.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
