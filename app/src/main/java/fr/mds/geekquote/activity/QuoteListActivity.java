@@ -72,6 +72,7 @@ public class QuoteListActivity extends Activity //implements View.OnClickListene
         this.btn_quote_list_add_quote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "OnClick");
                 if (!et_quote_list_add_quote.getText().toString().isEmpty()) {
                     addQuote(et_quote_list_add_quote.getText().toString());
                     et_quote_list_add_quote.setText("");
