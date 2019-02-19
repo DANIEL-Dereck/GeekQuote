@@ -1,22 +1,16 @@
 package fr.mds.geekquote.activity;
 
 import android.app.Activity;
-import android.icu.util.MeasureUnit;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.model.Quote;
 
@@ -76,41 +70,5 @@ public class QuoteListActivity extends Activity implements View.OnClickListener{
         }
 
         this.btn_quote_list_add_quote.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "OnStart");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "OnRestart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "OnResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "OnPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "OnStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "OnDestroy");
     }
 }

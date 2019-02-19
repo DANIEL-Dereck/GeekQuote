@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/quote"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:inputType="textCapSentences"/>
 
         <Button
             android:id="@+id/btn_quote_list_add_quote"
