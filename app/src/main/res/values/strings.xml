@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">GeekQuote</string>
+
+    <string-array name="quotes">
+        <item>I know kung fu.</item>
+        <item>Time&#8230;to die.</item>
+        <item>When Life Gives You Questions, Google has Answers</item>
+        <item>1f u c4n r34d th1s u r34lly n33d t0 g37 l41d</item>
+        <item>There are 10 types of people in the world: those who understand binary, and those who don\'t.</item>
+        <item>I\'m not anti-social; I\'m just not user friendly</item>
+        <item>I would love to change the world, but they won\'t give me the source code</item>
+        <item>I\'m still a geek on the inside, that\'s the important thing.</item>
+        <item>I am GROOT</item>
+    </string-array>
+</resources>
