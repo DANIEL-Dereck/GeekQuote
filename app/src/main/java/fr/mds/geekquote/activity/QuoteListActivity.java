@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.model.Quote;
 
-public class QuoteListActivity extends Activity implements View.OnClickListener{
-
+public class QuoteListActivity extends Activity //implements View.OnClickListener
+{
     public static final String TAG = "QuoteListActivity";
     private ArrayList<Quote> quotes = new ArrayList<>();
 
@@ -69,6 +69,16 @@ public class QuoteListActivity extends Activity implements View.OnClickListener{
             this.addQuote(quote);
         }
 
-        this.btn_quote_list_add_quote.setOnClickListener(this);
+        this.btn_quote_list_add_quote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!et_quote_list_add_quote.getText().toString().isEmpty()) {
+                    addQuote(et_quote_list_add_quote.getText().toString());
+                    et_quote_list_add_quote.setText("");
+                } else {
+                    Toast.makeText(getBaseContext(), "Impossible de crée une quote vide.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
