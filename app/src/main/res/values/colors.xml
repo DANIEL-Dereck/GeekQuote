@@ -6,4 +6,5 @@
 
     <color name="colorPair">#029685</color>
     <color name="colorImpair">#00C9B6</color>
+    <color name="colorBackground">#800E9789</color>
 </resources>

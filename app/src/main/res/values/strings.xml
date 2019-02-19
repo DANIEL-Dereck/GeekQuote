@@ -3,8 +3,7 @@
     <string name="default_text">DefaultText</string>
 
     <string name="add">+</string>
-    <string name="edit">Editer</string>
-    <string name="delete">Supprimer</string>
+    <string name="quote">Quote</string>
 
     <string-array name="quotes">
         <item>I know kung fu.</item>
