@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.joda.time.format.DateTimeFormat;
@@ -39,6 +40,9 @@ public class QuoteAdapter extends ArrayAdapter<Quote> {
 
         TextView tv_quote_item_quote = convertView.findViewById(R.id.tv_quote_item_quote);
         tv_quote_item_quote.setText(quote.getStrQuote());
+
+        RatingBar rb_quote_item_rating = convertView.findViewById(R.id.rb_quote_item_rating);
+        rb_quote_item_rating.setRating(quote.getRating());
 
         return convertView;
     }

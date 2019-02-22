@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteAdapter;
 import fr.mds.geekquote.model.Quote;
@@ -29,6 +31,11 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
     private void addQuote(String quote) {
         this.quotes.add(new Quote(quote));
+        this.quoteAdapter.notifyDataSetChanged();
+    }
+
+    private void addQuote(String quote, int rating) {
+        this.quotes.add(new Quote(quote, rating));
         this.quoteAdapter.notifyDataSetChanged();
     }
 
@@ -60,9 +67,8 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         lv_list_quote_quotes.setOnItemClickListener(this);
         lv_list_quote_quotes.setAdapter(quoteAdapter);
 
-
         for (String quote : getResources().getStringArray(R.array.quotes)) {
-            this.addQuote(quote);
+            this.addQuote(quote, new Random().nextInt(5));
         }
 
         this.btn_quote_list_add_quote.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,12 @@ public class Quote {
         this.creationDate = DateTime.now();
     }
 
+    public Quote(String strQuote, int rating) {
+        this.strQuote = strQuote;
+        this.rating = rating;
+        this.creationDate = DateTime.now();
+    }
+
     public String getStrQuote() {
         return strQuote;
     }

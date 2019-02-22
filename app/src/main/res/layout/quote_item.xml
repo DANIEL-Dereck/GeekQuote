@@ -19,9 +19,9 @@
         android:textColor="@android:color/white"/>
 
     <RatingBar
-        android:layout_width="match_parent"
+        android:id="@+id/rb_quote_item_rating"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:numStars="5"
         android:max="5"
         android:layout_gravity="center"/>
 
