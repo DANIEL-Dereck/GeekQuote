@@ -8,21 +8,17 @@
         android:id="@+id/tv_quote_item_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="7sp"
-        android:text="TextView"/>
+        android:textAlignment="textEnd"
+        android:layout_marginLeft="@dimen/txt_margin"
+        android:layout_marginRight="@dimen/txt_margin"
+        android:textSize="@dimen/txt_date"/>
 
     <TextView
         android:id="@+id/tv_quote_item_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginLeft="@dimen/txt_margin"
+        android:layout_marginRight="@dimen/txt_margin"
         android:textColor="@android:color/white"/>
-
-    <RatingBar
-        android:id="@+id/rb_quote_item_rating"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:max="5"
-        android:layout_gravity="center"/>
 
 </LinearLayout>

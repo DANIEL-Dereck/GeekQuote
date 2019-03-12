@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Size -->
     <dimen name="btn_radius">5dp</dimen>
     <dimen name="btn_padding">50dp</dimen>
+    <dimen name="txt_margin">10dp</dimen>
+
+    <!-- TextSize -->
+    <dimen name="txt_date">10sp</dimen>
 </resources>
