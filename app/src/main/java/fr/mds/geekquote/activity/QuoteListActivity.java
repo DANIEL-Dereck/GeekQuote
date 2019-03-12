@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteAdapter;
+import fr.mds.geekquote.helper.MyOpenHelper;
 import fr.mds.geekquote.model.Quote;
 import fr.mds.geekquote.util.ResultCode;
 
@@ -41,6 +42,8 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         Log.d(TAG, "OnCreate");
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.quote_list_activity);
+
+        MyOpenHelper helper = new MyOpenHelper(this);
 
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
@@ -95,6 +98,18 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(QUOTES_STATE, this.quotes);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
+    }
+
     private void addQuote(String quote) {
         this.quotes.add(new Quote(quote));
         this.quoteAdapter.notifyDataSetChanged();
@@ -113,17 +128,5 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         myIntent.putExtra(QuoteDetailActivity.EXTRA_POSITION, position);
         myIntent.putExtra(QuoteDetailActivity.EXTRA_QUOTE, item);
         startActivityForResult(myIntent, QuoteDetailActivity.MY_ACTIVITY_CODE);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putSerializable(QUOTES_STATE, this.quotes);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
     }
 }
