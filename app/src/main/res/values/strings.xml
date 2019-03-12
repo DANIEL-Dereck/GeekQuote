@@ -2,8 +2,12 @@
     <string name="app_name">GeekQuote</string>
     <string name="default_text">DefaultText</string>
 
+    <string name="validate">Valider</string>
+    <string name="cancel">Annuler</string>
     <string name="add">+</string>
     <string name="quote">Quote</string>
+
+    <string name="not_empty_quote">Impossible de crée une quote vide.</string>
 
     <string-array name="quotes">
         <item>I know kung fu.</item>

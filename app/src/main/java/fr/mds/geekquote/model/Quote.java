@@ -2,9 +2,30 @@ package fr.mds.geekquote.model;
 
 import org.joda.time.DateTime;
 
-public class Quote {
+import java.io.Serializable;
+
+public class Quote implements Serializable {
+
+    public static class QuoteContract {
+        public static final String TABLE_NAME = "quote";
+
+        public static final String COL_ID = "id";
+        public static final String COL_STRQUOTE = "quote";
+        public static final String COL_RATING = "rating";
+        public static final String COL_CREATED_AT = "created_at";
+
+        public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_STRQUOTE + " TEXT NOT NULL, "
+                + COL_RATING + " TIMESTAMP, "
+                + COL_CREATED_AT + " REAL ); ";
+
+        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME + " ;";
+    }
+
+    private int id;
     private String strQuote;
-    private int rating;
+    private float rating;
     private DateTime creationDate;
 
     public Quote() {
@@ -22,6 +43,15 @@ public class Quote {
         this.creationDate = DateTime.now();
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public Quote setId(int id) {
+        this.id = id;
+        return this;
+    }
+
     public String getStrQuote() {
         return strQuote;
     }
@@ -31,11 +61,11 @@ public class Quote {
         return this;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public Quote setRating(int rating) {
+    public Quote setRating(float rating) {
         this.rating = rating;
         return this;
     }
