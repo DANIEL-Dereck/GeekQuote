@@ -52,13 +52,13 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
         this.initComponent();
 
-//        if (savedInstanceState != null) {
-//            onRestoreInstanceState(savedInstanceState);
-//        } else {
-//        }
+        if (savedInstanceState != null) {
+            onRestoreInstanceState(savedInstanceState);
+        } else {
+            this.quotes.clear();
+            this.quotes.addAll(this.quoteRepository.getAll());
+        }
 
-        this.quotes.clear();
-        this.quotes.addAll(this.quoteRepository.getAll());
 
         this.quoteAdapter = new QuoteAdapter(this, quotes);
         lv_list_quote_quotes.setOnItemClickListener(this);
@@ -118,6 +118,16 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
                             }
                         }
                         break;
+                    case ResultCode.RESULT_DELETE:
+                        int position = data.getIntExtra(QuoteDetailActivity.EXTRA_POSITION, -1);
+                        int idToDelete = data.getIntExtra(QuoteDetailActivity.EXTRA_QUOTE_ID, -1);
+
+                        if (idToDelete >= 1) {
+                            this.quotes.remove(position);
+                            this.quoteRepository.delete(idToDelete);
+                        }
+                        this.quoteAdapter.notifyDataSetChanged();
+                        break;
                 }
                 break;
         }
@@ -142,9 +152,9 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     // Add quote.
     private void addQuote(String quote) {
         Quote item = new Quote(quote);
+        this.quoteRepository.insert(item);
         this.quotes.add(item);
 
-        this.quoteRepository.insert(item);
         if (this.quoteAdapter != null) {
             this.quoteAdapter.notifyDataSetChanged();
         }
@@ -153,9 +163,9 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     // Add quote.
     private void addQuote(String quote, int rating) {
         Quote item = new Quote(quote, rating);
+        this.quoteRepository.insert(item);
         this.quotes.add(item);
 
-        this.quoteRepository.insert(item);
         if (this.quoteAdapter != null) {
                     this.quoteAdapter.notifyDataSetChanged();
         }

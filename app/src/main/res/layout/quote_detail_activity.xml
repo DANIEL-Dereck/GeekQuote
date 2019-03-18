@@ -56,4 +56,13 @@
             android:layout_weight="1"/>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_quote_detail_del"
+        android:text="@string/supprimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_del"
+        android:textColor="@android:color/white"
+        />
 </LinearLayout>

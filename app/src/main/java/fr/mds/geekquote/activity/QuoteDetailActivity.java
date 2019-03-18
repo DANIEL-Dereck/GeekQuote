@@ -17,12 +17,14 @@ public class QuoteDetailActivity extends Activity {
     public static final int MY_ACTIVITY_CODE = 0x02;
     public static final String EXTRA_QUOTE = "EXTRA_QUOTE";
     public static final String EXTRA_POSITION = "EXTRA_POSITION";
+    public static final String EXTRA_QUOTE_ID = "EXTRA_QUOTE_ID";
 
     private EditText et_quote_detail_quote;
     private TextView tv_quote_detail_date;
     private RatingBar rb_quote_detail_rating;
     private Button btn_quote_detail_ok;
     private Button btn_quote_detail_cancel;
+    private Button btn_quote_detail_del;
 
     private Quote item;
     private int position;
@@ -34,6 +36,7 @@ public class QuoteDetailActivity extends Activity {
         this.rb_quote_detail_rating = findViewById(R.id.rb_quote_detail_rating);
         this.btn_quote_detail_ok = findViewById(R.id.btn_quote_detail_ok);
         this.btn_quote_detail_cancel = findViewById(R.id.btn_quote_detail_cancel);
+        this.btn_quote_detail_del = findViewById(R.id.btn_quote_detail_del);
     }
 
     @Override
@@ -76,5 +79,15 @@ public class QuoteDetailActivity extends Activity {
             }
         });
 
+        this.btn_quote_detail_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myIntent.putExtra(QuoteDetailActivity.EXTRA_QUOTE_ID, item.getId());
+                myIntent.putExtra(QuoteDetailActivity.EXTRA_POSITION, position);
+
+                setResult(ResultCode.RESULT_DELETE, myIntent);
+                finish();
+            }
+        });
     }
 }
