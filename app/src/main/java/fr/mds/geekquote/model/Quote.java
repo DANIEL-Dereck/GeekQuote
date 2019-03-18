@@ -1,17 +1,15 @@
 package fr.mds.geekquote.model;
 
-import com.orm.SugarRecord;
-
 import org.joda.time.DateTime;
-
 import java.io.Serializable;
 
-public class Quote extends SugarRecord<Quote> implements Serializable {
+public class Quote implements Serializable {
     private String strQuote;
     private float rating;
     private DateTime creationDate;
 
     public Quote() {
+
     }
 
     public Quote(String strQuote) {
@@ -20,10 +18,16 @@ public class Quote extends SugarRecord<Quote> implements Serializable {
         this.creationDate = DateTime.now();
     }
 
-    public Quote(String strQuote, int rating) {
+    public Quote(String strQuote, float rating) {
         this.strQuote = strQuote;
         this.rating = rating;
         this.creationDate = DateTime.now();
+    }
+
+    public Quote(String strQuote, int rating, DateTime creationDate) {
+        this.strQuote = strQuote;
+        this.rating = rating;
+        this.creationDate = creationDate;
     }
 
     public String getStrQuote() {

@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
+
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteAdapter;
 import fr.mds.geekquote.model.Quote;
@@ -28,11 +30,20 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     private EditText et_quote_list_add_quote;
     private ListView lv_list_quote_quotes;
 
-
     private void initComponent() {
         this.btn_quote_list_add_quote = findViewById(R.id.btn_quote_list_add_quote);
         this.et_quote_list_add_quote = findViewById(R.id.et_quote_list_add_quote);
         this.lv_list_quote_quotes = findViewById(R.id.lv_list_quote_quotes);
+    }
+
+    private void generateData()
+    {
+        quotes = new ArrayList();
+        Random ran = new Random();
+
+        for (String strItem : this.getResources().getStringArray(R.array.quotes)) {
+            this.addQuote(strItem, ran.nextInt(5));
+        }
     }
 
     @Override
@@ -44,11 +55,7 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
         } else {
-            quotes = new ArrayList();
-
-            while (Quote.findAll(Quote.class).hasNext()){
-                quotes.add(Quote.findAll(Quote.class).next());
-            }
+            this.generateData();
         }
 
         this.initComponent();
@@ -107,12 +114,16 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     }
 
     private void addQuote(String quote) {
-        this.quotes.add(new Quote(quote));
+        Quote item = new Quote(quote);
+        this.quotes.add(item);
+
         this.quoteAdapter.notifyDataSetChanged();
     }
 
     private void addQuote(String quote, int rating) {
-        this.quotes.add(new Quote(quote, rating));
+        Quote item = new Quote(quote, rating);
+        this.quotes.add(item);
+
         this.quoteAdapter.notifyDataSetChanged();
     }
 
