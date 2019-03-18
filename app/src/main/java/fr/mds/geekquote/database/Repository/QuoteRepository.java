@@ -27,14 +27,18 @@ public class QuoteRepository extends BaseRepository<Quote> {
     }
 
     @Override
-    protected Quote update(Quote item) {
+    protected void update(Quote item) {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
 
-//        db.update(Quote.QuoteContract.TABLE_NAME, values,"");
+        values.put(Quote.QuoteContract.COL_STRQUOTE, item.getStrQuote());
+        values.put(Quote.QuoteContract.COL_RATING, item.getRating());
+        values.put(Quote.QuoteContract.COL_CREATIONDATE, item.getCreationDate().getMillis());
+
+        String[] whereArgs = { String.valueOf(item.getId()) };
+        db.update(Quote.QuoteContract.TABLE_NAME, values, "id=?", whereArgs);
 
         DatabaseManager.getInstance().closeDatabase();
-        return null;
     }
 
     @Override

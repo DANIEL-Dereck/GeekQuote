@@ -6,7 +6,7 @@ public abstract class BaseRepository<T>{
     protected T item;
 
     protected abstract int insert(T item);
-    protected abstract T update(T item);
+    protected abstract void update(T item);
     protected abstract void delete(T item);
     protected abstract void delete(int id);
     protected abstract T get(int id);
