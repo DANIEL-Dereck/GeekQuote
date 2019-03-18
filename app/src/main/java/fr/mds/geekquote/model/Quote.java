@@ -16,7 +16,7 @@ public class Quote implements Serializable {
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ( "
                 + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-                + COL_STRQUOTE + "TEXT , "
+                + COL_STRQUOTE + " TEXT , "
                 + COL_RATING + " REAL , "
                 + COL_CREATIONDATE + " INTEGER "
                 + " );";

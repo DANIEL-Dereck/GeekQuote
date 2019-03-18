@@ -11,7 +11,7 @@ import fr.mds.geekquote.model.Quote;
 
 public class QuoteRepository extends BaseRepository<Quote> {
     @Override
-    protected int insert(Quote item) {
+    public int insert(Quote item) {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
         int newId = -1;
@@ -27,7 +27,7 @@ public class QuoteRepository extends BaseRepository<Quote> {
     }
 
     @Override
-    protected void update(Quote item) {
+    public void update(Quote item) {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ContentValues values = new ContentValues();
 
@@ -42,12 +42,12 @@ public class QuoteRepository extends BaseRepository<Quote> {
     }
 
     @Override
-    protected void delete(Quote item) {
+    public void delete(Quote item) {
         delete(item.getId());
     }
 
     @Override
-    protected void delete(int id) {
+    public void delete(int id) {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
 
         String query = "DELETE FROM " + Quote.QuoteContract.TABLE_NAME + " WHERE " + Quote.QuoteContract.COL_ID + " = " + id + ";";
@@ -57,7 +57,7 @@ public class QuoteRepository extends BaseRepository<Quote> {
     }
 
     @Override
-    protected Quote get(int id) {
+    public Quote get(int id) {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         Quote item = new Quote();
         String query = "SELECT * FROM " + Quote.QuoteContract.TABLE_NAME + " WHERE " + Quote.QuoteContract.COL_ID + " = " + id + " ;";
@@ -82,7 +82,7 @@ public class QuoteRepository extends BaseRepository<Quote> {
     }
 
     @Override
-    protected List<Quote> getAll() {
+    public List<Quote> getAll() {
         SQLiteDatabase db = DatabaseManager.getInstance().openDatabase();
         ArrayList<Quote> quotes = new ArrayList<>();
         String query = "SELECT * FROM " + Quote.QuoteContract.TABLE_NAME + ";";

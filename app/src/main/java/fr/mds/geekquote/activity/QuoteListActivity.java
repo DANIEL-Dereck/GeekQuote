@@ -13,10 +13,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteAdapter;
+import fr.mds.geekquote.database.Repository.QuoteRepository;
 import fr.mds.geekquote.model.Quote;
 import fr.mds.geekquote.util.ResultCode;
 
@@ -28,6 +28,7 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     private QuoteAdapter quoteAdapter;
 
     private SharedPreferences sharedPreferences;
+    private QuoteRepository quoteRepository;
 
     private Button btn_quote_list_add_quote;
     private EditText et_quote_list_add_quote;
@@ -36,6 +37,7 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     // Init all component used in this activity.
     private void initComponent() {
         sharedPreferences = getPreferences(MODE_PRIVATE);
+        quoteRepository = new QuoteRepository();
 
         this.btn_quote_list_add_quote = findViewById(R.id.btn_quote_list_add_quote);
         this.et_quote_list_add_quote = findViewById(R.id.et_quote_list_add_quote);
@@ -48,13 +50,15 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.quote_list_activity);
 
-        if (savedInstanceState != null) {
-            onRestoreInstanceState(savedInstanceState);
-        } else {
-            this.generateData();
-        }
-
         this.initComponent();
+
+        this.quotes = new ArrayList<>(this.quoteRepository.getAll());
+
+//        if (savedInstanceState != null) {
+//            onRestoreInstanceState(savedInstanceState);
+//        } else {
+//        }
+
         this.quoteAdapter = new QuoteAdapter(this, quotes);
         lv_list_quote_quotes.setOnItemClickListener(this);
         lv_list_quote_quotes.setAdapter(quoteAdapter);
@@ -106,6 +110,8 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
                             if (item instanceof Quote) {
                                 Quote newItem = (Quote) item;
+
+                                this.quoteRepository.update(newItem);
                                 this.quotes.set(position, newItem);
                                 this.quoteAdapter.notifyDataSetChanged();
                             }
@@ -130,22 +136,12 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         }
     }
 
-    // Generate fake data.
-    private void generateData()
-    {
-        quotes = new ArrayList();
-        Random ran = new Random();
-
-        for (String strItem : this.getResources().getStringArray(R.array.quotes)) {
-            this.addQuote(strItem, ran.nextInt(5));
-        }
-    }
-
     // Add quote.
     private void addQuote(String quote) {
         Quote item = new Quote(quote);
         this.quotes.add(item);
 
+        this.quoteRepository.insert(item);
         if (this.quoteAdapter != null) {
             this.quoteAdapter.notifyDataSetChanged();
         }
@@ -156,8 +152,9 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         Quote item = new Quote(quote, rating);
         this.quotes.add(item);
 
+        this.quoteRepository.insert(item);
         if (this.quoteAdapter != null) {
-            this.quoteAdapter.notifyDataSetChanged();
+                    this.quoteAdapter.notifyDataSetChanged();
         }
     }
 
