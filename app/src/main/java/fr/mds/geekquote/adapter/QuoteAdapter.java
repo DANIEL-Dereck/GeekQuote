@@ -28,15 +28,18 @@ public class QuoteAdapter extends ArrayAdapter<Quote> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.quote_item, parent, false);
         }
 
+        // Change BackgroundColor by code.
         if (position % 2 == 0){
             convertView.setBackgroundResource(R.color.colorPair);
         } else {
             convertView.setBackgroundResource(R.color.colorImpair);
         }
 
+        // Add date into dateItem.
         TextView tv_quote_item_date = convertView.findViewById(R.id.tv_quote_item_date);
         tv_quote_item_date.setText(quote.getCreationDate().toString(DateTimeFormat.forPattern("dd MMMM yyyy hh:mm:ss")));
 
+        // Add
         TextView tv_quote_item_quote = convertView.findViewById(R.id.tv_quote_item_quote);
         tv_quote_item_quote.setText(quote.getStrQuote());
 

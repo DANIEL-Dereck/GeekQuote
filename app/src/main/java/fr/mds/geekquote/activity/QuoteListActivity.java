@@ -2,6 +2,7 @@ package fr.mds.geekquote.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,24 +27,19 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     private ArrayList<Quote> quotes = new ArrayList<>();
     private QuoteAdapter quoteAdapter;
 
+    private SharedPreferences sharedPreferences;
+
     private Button btn_quote_list_add_quote;
     private EditText et_quote_list_add_quote;
     private ListView lv_list_quote_quotes;
 
+    // Init all component used in this activity.
     private void initComponent() {
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+
         this.btn_quote_list_add_quote = findViewById(R.id.btn_quote_list_add_quote);
         this.et_quote_list_add_quote = findViewById(R.id.et_quote_list_add_quote);
         this.lv_list_quote_quotes = findViewById(R.id.lv_list_quote_quotes);
-    }
-
-    private void generateData()
-    {
-        quotes = new ArrayList();
-        Random ran = new Random();
-
-        for (String strItem : this.getResources().getStringArray(R.array.quotes)) {
-            this.addQuote(strItem, ran.nextInt(5));
-        }
     }
 
     @Override
@@ -63,18 +59,37 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         lv_list_quote_quotes.setOnItemClickListener(this);
         lv_list_quote_quotes.setAdapter(quoteAdapter);
 
+        // Event onClick.
         this.btn_quote_list_add_quote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "OnClick");
                 if (!et_quote_list_add_quote.getText().toString().isEmpty()) {
                     addQuote(et_quote_list_add_quote.getText().toString());
+
+                    // Add last quote in sharePreference.
+                    if (sharedPreferences != null) {
+                        sharedPreferences.edit().putString("LAST_QUOTE", et_quote_list_add_quote.getText().toString()).commit();
+                    }
+
                     et_quote_list_add_quote.setText("");
                 } else {
+                    // Toast
                     Toast.makeText(QuoteListActivity.this, getText(R.string.not_empty_quote), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String lastQuote = sharedPreferences.getString("LAST_QUOTE","");
+
+        if (lastQuote != null && !lastQuote.isEmpty()) {
+            Toast.makeText(this, lastQuote, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -110,21 +125,40 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
+        if (savedInstanceState.getSerializable(QUOTES_STATE) instanceof ArrayList) {
+            this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
+        }
     }
 
+    // Generate fake data.
+    private void generateData()
+    {
+        quotes = new ArrayList();
+        Random ran = new Random();
+
+        for (String strItem : this.getResources().getStringArray(R.array.quotes)) {
+            this.addQuote(strItem, ran.nextInt(5));
+        }
+    }
+
+    // Add quote.
     private void addQuote(String quote) {
         Quote item = new Quote(quote);
         this.quotes.add(item);
 
-        this.quoteAdapter.notifyDataSetChanged();
+        if (this.quoteAdapter != null) {
+            this.quoteAdapter.notifyDataSetChanged();
+        }
     }
 
+    // Add quote.
     private void addQuote(String quote, int rating) {
         Quote item = new Quote(quote, rating);
         this.quotes.add(item);
 
-        this.quoteAdapter.notifyDataSetChanged();
+        if (this.quoteAdapter != null) {
+            this.quoteAdapter.notifyDataSetChanged();
+        }
     }
 
     public void onItemClick(AdapterView<?> theList,
