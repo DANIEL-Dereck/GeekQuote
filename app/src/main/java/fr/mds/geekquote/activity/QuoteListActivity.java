@@ -52,12 +52,13 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
         this.initComponent();
 
-        this.quotes = new ArrayList<>(this.quoteRepository.getAll());
-
 //        if (savedInstanceState != null) {
 //            onRestoreInstanceState(savedInstanceState);
 //        } else {
 //        }
+
+        this.quotes.clear();
+        this.quotes.addAll(this.quoteRepository.getAll());
 
         this.quoteAdapter = new QuoteAdapter(this, quotes);
         lv_list_quote_quotes.setOnItemClickListener(this);
@@ -132,7 +133,9 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState.getSerializable(QUOTES_STATE) instanceof ArrayList) {
-            this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
+//            this.quotes = (ArrayList<Quote>) savedInstanceState.getSerializable(QUOTES_STATE);
+            this.quotes.clear();
+            this.quotes.addAll(this.quoteRepository.getAll());
         }
     }
 
