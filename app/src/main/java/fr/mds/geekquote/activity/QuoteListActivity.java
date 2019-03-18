@@ -12,10 +12,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 import fr.mds.geekquote.R;
 import fr.mds.geekquote.adapter.QuoteAdapter;
-import fr.mds.geekquote.helper.MyOpenHelper;
 import fr.mds.geekquote.model.Quote;
 import fr.mds.geekquote.util.ResultCode;
 
@@ -43,22 +41,20 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.quote_list_activity);
 
-        MyOpenHelper helper = new MyOpenHelper(this);
-
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState);
+        } else {
+            quotes = new ArrayList();
+
+            while (Quote.findAll(Quote.class).hasNext()){
+                quotes.add(Quote.findAll(Quote.class).next());
+            }
         }
 
         this.initComponent();
         this.quoteAdapter = new QuoteAdapter(this, quotes);
         lv_list_quote_quotes.setOnItemClickListener(this);
         lv_list_quote_quotes.setAdapter(quoteAdapter);
-
-        if (this.quotes.size() <= 0) {
-            for (String quote : getResources().getStringArray(R.array.quotes)) {
-                this.addQuote(quote, new Random().nextInt(5));
-            }
-        }
 
         this.btn_quote_list_add_quote.setOnClickListener(new View.OnClickListener() {
             @Override
