@@ -79,7 +79,6 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
                     et_quote_list_add_quote.setText("");
                 } else {
-                    // Toast
                     Toast.makeText(QuoteListActivity.this, getText(R.string.not_empty_quote), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -157,17 +156,6 @@ public class QuoteListActivity extends Activity implements AdapterView.OnItemCli
 
         if (this.quoteAdapter != null) {
             this.quoteAdapter.notifyDataSetChanged();
-        }
-    }
-
-    // Add quote.
-    private void addQuote(String quote, int rating) {
-        Quote item = new Quote(quote, rating);
-        this.quoteRepository.insert(item);
-        this.quotes.add(item);
-
-        if (this.quoteAdapter != null) {
-                    this.quoteAdapter.notifyDataSetChanged();
         }
     }
 

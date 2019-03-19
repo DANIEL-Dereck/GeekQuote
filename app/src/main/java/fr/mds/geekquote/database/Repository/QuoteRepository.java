@@ -22,6 +22,7 @@ public class QuoteRepository extends BaseRepository<Quote> {
 
         newId = (int)db.insert(Quote.QuoteContract.TABLE_NAME, null, values);
 
+        item.setId(newId);
         DatabaseManager.getInstance().closeDatabase();
         return newId;
     }
